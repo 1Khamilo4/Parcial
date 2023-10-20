@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/vehiculos")
+@CrossOrigin("http://localhost:4200/")
 public class VehiculoController {
     @Autowired
     private VehiculoService vehiculoService;
@@ -28,7 +29,7 @@ public class VehiculoController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<?> get_listarMecanico(){
+    public ResponseEntity<?> get_listarVehiculos(){
         return ResponseEntity.ok(vehiculoService.get_obtenerVehiculos());
     }
 

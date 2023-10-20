@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
+
+table {
+    width: 100%;
+  }
+  
+.mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+td, th {
+    width: 25%;
+}
+
+.btnEditar{
+  
+  display: inline;
+  margin-left: -13px; 
+}
+
+.btnEliminar{
+  
+  display: inline;
+  margin-left: 39px;
+}
+
+.editar{
+  color: purple;
+}
+.eliminar{
+  color: red;
+}
+
+.texto-tabla{  
+  position: absolute;
+  margin-left: 84%;
+  margin-top: -60px;
+}
+.letter{
+  font-family: 'Kaushan Script', cursive;
+  font-size: 210%;
+}
+
+.tabla{
+  padding: 10px;
+}

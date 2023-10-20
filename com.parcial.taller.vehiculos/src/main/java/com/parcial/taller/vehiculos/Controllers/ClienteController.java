@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/clientes")
+@CrossOrigin("http://localhost:4200/")
 public class ClienteController {
     @Autowired
     private ClienteService clienteService;

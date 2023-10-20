@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ClienteComponent } from './pages/cliente/cliente.component';
 import { MecanicoComponent } from './pages/mecanico/mecanico.component';
 import { VehiculoComponent } from './pages/vehiculo/vehiculo.component';
+import { FormClientesComponent } from './components/forms/form-clientes/form-clientes.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,11 @@ const routes: Routes = [
   {
     path: "vehiculos",
     component:VehiculoComponent,
+    pathMatch:"full"
+  },
+  {
+    path: "cliente-form",
+    component:FormClientesComponent,
     pathMatch:"full"
   },
 ];

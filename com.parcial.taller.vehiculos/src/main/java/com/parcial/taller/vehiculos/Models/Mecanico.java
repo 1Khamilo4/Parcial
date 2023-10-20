@@ -14,6 +14,9 @@ public class Mecanico {
     private String nombre;
     private String especialidad;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Vehiculo vehiculo;
+
     public Mecanico() {
     }
 
@@ -39,5 +42,13 @@ public class Mecanico {
 
     public void setEspecialidad(String especialidad) {
         this.especialidad = especialidad;
+    }
+
+    public Vehiculo getVehiculo() {
+        return vehiculo;
+    }
+
+    public void setVehiculo(Vehiculo vehiculo) {
+        this.vehiculo = vehiculo;
     }
 }

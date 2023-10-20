@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/mecanicos")
+@CrossOrigin("http://localhost:4200/")
 public class MecanicoController {
     @Autowired
     private MecanicoService mecanicoService;
