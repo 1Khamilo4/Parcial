@@ -21,6 +21,7 @@ import { MatListModule } from '@angular/material/list';
 import { MenuComponent } from './components/menu/menu.component';
 import { InconUserComponent } from './components/incon-user/incon-user.component';
 import {MatCardModule} from '@angular/material/card';
+import {MatSelectModule} from '@angular/material/select';
 
 /* Avatar */
 import { AvatarModule } from 'ngx-avatars';
@@ -36,6 +37,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 /* Dialog */
 import {MatDialogModule} from '@angular/material/dialog';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 
 @NgModule({
@@ -49,6 +51,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     FormClientesComponent,
     FormMecanicoComponent,
     FormVehiculoComponent,
+    SpinnerComponent,
     
     
   ],
@@ -70,7 +73,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSelectModule
     
   ],
   providers: [],

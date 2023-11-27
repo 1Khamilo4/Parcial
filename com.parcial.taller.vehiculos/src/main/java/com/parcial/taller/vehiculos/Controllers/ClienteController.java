@@ -1,11 +1,15 @@
 package com.parcial.taller.vehiculos.Controllers;
 
 import com.parcial.taller.vehiculos.Models.Cliente;
+import com.parcial.taller.vehiculos.Repositories.ClienteRepository;
 import com.parcial.taller.vehiculos.Services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/clientes")
@@ -14,7 +18,8 @@ public class ClienteController {
     @Autowired
     private ClienteService clienteService;
 
-
+    @Autowired
+    private ClienteRepository clienteRepository;
     @PostMapping("/")
     public ResponseEntity<Cliente> post_guardarCliente(@RequestBody Cliente cliente){
         Cliente clienteGuardada = clienteService.post_agregarCliente(cliente);
@@ -30,7 +35,17 @@ public class ClienteController {
 
     @GetMapping("/")
     public ResponseEntity<?> get_listarCategorias(){
-        return ResponseEntity.ok(clienteService.get_obtenerClientes());
+
+        Set<Cliente> clientes_clean = clienteService.get_obtenerClientes();
+        Set<Cliente> clientes = new HashSet<>();
+
+        clientes_clean.forEach( cliente ->{
+            if(cliente.isEnabled() == true){
+                clientes.add(cliente);
+            }
+        });
+
+        return ResponseEntity.ok(clientes);
     }
 
     @PutMapping("/{id}")
@@ -39,7 +54,14 @@ public class ClienteController {
     }
 
     @DeleteMapping("/{id}")
-    public void del_eliminarCliente(@PathVariable("id") Long id){
-        clienteService.del_eliminarCliente(id);
+    public Cliente del_eliminarCliente(@PathVariable("id") Long id) throws Exception {
+
+        Cliente del_cliente = clienteService.get_obtenerCliente(id);
+        del_cliente.setEnabled(false);
+
+        clienteService.put_actualizarCliente(del_cliente.getId(),del_cliente);
+
+        return del_cliente;
+        //clienteService.del_eliminarCliente(id);
     }
 }

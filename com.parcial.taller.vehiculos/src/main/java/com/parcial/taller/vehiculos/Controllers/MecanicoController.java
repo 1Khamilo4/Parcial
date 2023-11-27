@@ -8,6 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @RestController
 @RequestMapping("/mecanicos")
 @CrossOrigin("http://localhost:4200/")
@@ -30,7 +33,16 @@ public class MecanicoController {
 
     @GetMapping("/")
     public ResponseEntity<?> get_listarMecanico(){
-        return ResponseEntity.ok(mecanicoService.get_obtenerMecanicos());
+        Set<Mecanico> mecanicos_clean = mecanicoService.get_obtenerMecanicos();
+        Set<Mecanico> mecanicos = new HashSet<>();
+
+        mecanicos_clean.forEach( mecanico ->{
+            if(mecanico.isEnabled() == true){
+                mecanicos.add(mecanico);
+            }
+        });
+
+        return ResponseEntity.ok(mecanicos);
     }
 
     @PutMapping("/{id}")
@@ -39,7 +51,16 @@ public class MecanicoController {
     }
 
     @DeleteMapping("/{id}")
-    public void del_eliminarMecanico(@PathVariable("id") Long id){
-        mecanicoService.del_eliminarMecanico(id);
+    public Mecanico del_eliminarMecanico(@PathVariable("id") Long id) throws Exception {
+
+        Mecanico mecanico_del = mecanicoService.get_obtenerMecanico(id);
+
+        mecanico_del.setEnabled(false);
+
+        mecanicoService.put_actualizarMecanico(mecanico_del.getId(), mecanico_del);
+
+        //mecanicoService.del_eliminarMecanico(id);
+
+        return mecanico_del;
     }
 }

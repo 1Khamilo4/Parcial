@@ -13,6 +13,7 @@ public class Mecanico {
     private Long id;
     private String nombre;
     private String especialidad;
+    private boolean enabled = true;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Vehiculo vehiculo;
@@ -42,6 +43,14 @@ public class Mecanico {
 
     public void setEspecialidad(String especialidad) {
         this.especialidad = especialidad;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public Vehiculo getVehiculo() {

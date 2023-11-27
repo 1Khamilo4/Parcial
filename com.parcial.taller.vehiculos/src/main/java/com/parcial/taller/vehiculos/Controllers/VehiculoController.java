@@ -1,5 +1,6 @@
 package com.parcial.taller.vehiculos.Controllers;
 
+import com.parcial.taller.vehiculos.Models.Cliente;
 import com.parcial.taller.vehiculos.Models.Mecanico;
 import com.parcial.taller.vehiculos.Models.Vehiculo;
 import com.parcial.taller.vehiculos.Services.VehiculoService;
@@ -7,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/vehiculos")
@@ -30,7 +34,16 @@ public class VehiculoController {
 
     @GetMapping("/")
     public ResponseEntity<?> get_listarVehiculos(){
-        return ResponseEntity.ok(vehiculoService.get_obtenerVehiculos());
+
+        Set<Vehiculo> vehiculos_clean = vehiculoService.get_obtenerVehiculos();
+        Set<Vehiculo> vehiculos = new HashSet<>();
+
+        vehiculos_clean.forEach( vehiculo ->{
+            if(vehiculo.isEnabled() == true){
+                vehiculos.add(vehiculo);
+            }
+        });
+        return ResponseEntity.ok(vehiculos);
     }
 
     @PutMapping("/{id}")
@@ -39,7 +52,14 @@ public class VehiculoController {
     }
 
     @DeleteMapping("/{id}")
-    public void del_eliminarMecanico(@PathVariable("id") Long id){
-        vehiculoService.del_eliminarVehiculo(id);
+    public Vehiculo del_eliminarMecanico(@PathVariable("id") Long id) throws Exception {
+
+        Vehiculo del_vehiculo = vehiculoService.get_obtenerVehiculo(id);
+        del_vehiculo.setEnabled(false);
+
+        vehiculoService.put_actualizarVehiculo(del_vehiculo.getId(), del_vehiculo);
+
+        return del_vehiculo;
+        //vehiculoService.del_eliminarVehiculo(id);
     }
 }

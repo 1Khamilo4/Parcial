@@ -15,6 +15,7 @@ public class Vehiculo {
     private Long id;
     private String marca;
     private String modelo;
+    private boolean enabled=true;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "vehiculo")
     @JsonIgnore
@@ -57,6 +58,14 @@ public class Vehiculo {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public Set<Mecanico> getMecanicos() {

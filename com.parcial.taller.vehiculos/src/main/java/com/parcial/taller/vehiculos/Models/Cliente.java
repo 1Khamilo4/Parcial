@@ -16,6 +16,7 @@ public class Cliente {
     private Long id;
     private String nombre;
     private String email;
+    private boolean enabled=true;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "cliente")
     @JsonIgnore
@@ -46,6 +47,14 @@ public class Cliente {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public Set<Vehiculo> getVehiculos() {

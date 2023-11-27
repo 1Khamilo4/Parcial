@@ -31,7 +31,19 @@
                             <mat-error *ngIf="formVehiculo.controls['modelo'].hasError('required')">
                                 El modelo es <strong>REQUERIDA</strong>
                             </mat-error>
-                        </mat-form-field>                  
+                        </mat-form-field>      
+                        
+                        <mat-form-field>
+                            <mat-label>Cliente</mat-label>
+                            <mat-select formControlName="cliente"  >
+                              <span *ngFor="let c of clientes">
+                                  <mat-option [value]="c.id">{{c.nombre}}</mat-option>
+                              </span>                              
+                            </mat-select>
+                            <mat-error *ngIf="formVehiculo.controls['cliente'].hasError('required')">
+                                El cliente es <strong>REQUERIDA</strong>
+                            </mat-error>
+                        </mat-form-field>
                             
                         
                     </mat-card-content>
@@ -39,7 +51,7 @@
                     <mat-card-actions ><!-- Secciones de botones -->
 
                         <div class="container text-center">
-                            <button mat-raised-button color="primary" type="submit">Submit</button>
+                            <button mat-raised-button color="primary" type="submit">{{formService.title}}</button>
                         </div>
                         
                     </mat-card-actions>
